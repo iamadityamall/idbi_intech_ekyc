@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href=".././dashboard/dashboard.css" />
+  </head>
+  <body>
+    <section class="dashboard">
+      <aside
+        class="sidebar"
+        style="padding-left: 1rem; padding-right: 1rem; padding-top: 1rem"
+      >
+        <div class="sidebar-bank-logo"></div>
+      </aside>
+      <div class="dash__container">
+        <header class="header-bar">
+          <div class="left__container">
+            <button type="button" class="sidebar-icon"></button>
+            <div class="bank-logo"></div>
+          </div>
+
+          <div class="right__container">
+            <div class="darkmode"></div>
+            <div class="profile-container">
+              <figure class="profile">
+                <img
+                  src="../../assests/logo/female.png"
+                  alt=""
+                  style="
+                    width: 50px;
+                    height: 50px;
+                    background: yellow;
+                    border-radius: 100%;
+                  "
+                />
+              </figure>
+              <p>Aditi mall</p>
+              <button>submenu</button>
+            </div>
+          </div>
+        </header>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            height: 100%;
+            padding: 10rem;
+            column-gap: 2rem;
+          "
+        >
+          <div
+            style="
+              padding: 0 5rem 0 5rem;
+              height: 200px;
+              background: white;
+              border-radius: 10px;
+            "
+          ></div>
+          <div
+            style="
+              padding: 0 5rem 0 5rem;
+              height: 200px;
+              background: white;
+              border-radius: 10px;
+            "
+          ></div>
+          <div
+            style="
+              padding: 0 5rem 0 5rem;
+              height: 200px;
+              background: white;
+              border-radius: 10px;
+            "
+          ></div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const button = document.querySelector("button");
+      const dash__container = document.querySelector(".dash__container");
+      const logo = document.querySelector(".bank-logo");
+
+      button.addEventListener("click", () => {
+        dash__container.classList.toggle("active");
+        logo.classList.toggle("show-logo");
+      });
+    </script>
+  </body>
+</html>
