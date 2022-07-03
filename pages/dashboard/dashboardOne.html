@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DashboardOne</title>
+    <link rel="stylesheet" href="./dashboardOne.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <section class="dashboard-section">
+      <aside class="sidebar">
+        <nav class="sidebar-navbar">
+          <!-- <figure class="inactive" id="logo1">
+            <img src="../../assests/logo/idbi-symbol.png" />
+          </figure> -->
+          <figure id="logo2">
+            <img src="../../assests/logo/idbi-bank-logo.svg" alt="" />
+          </figure>
+          <button><i class="fa fa-bars"></i></button>
+        </nav>
+        <div class="sidebar-buttons-container">
+          <button class="sidebarButton sidebar-button-active">
+            <i class="fa fa-home"></i>
+            <span>dashboard</span>
+          </button>
+          <button class="sidebarButton">
+            <i class="fa fa-user"> </i>
+            <span>profile</span>
+          </button>
+        </div>
+      </aside>
+      <div class="tabs-container">
+        <nav class="tabs-navbar">
+          <div class="profile-container">
+            <div>
+              <h1>Welcome, user</h1>
+              <span>Last Login:Apr 11, 2022 10:10:18</span>
+            </div>
+
+            <figure>
+              <img src="../../assests/logo/female.png" alt="" />
+            </figure>
+            <div class="submenu">
+              <button><i class="fa fa-gear"></i><span>Settings</span></button>
+              <button>
+                <i class="fa fa-user" aria-hidden="true"></i><span>User</span>
+              </button>
+              <button>
+                <i class="fa fa-language" aria-hidden="true"></i
+                ><span>Language</span>
+              </button>
+              <button>
+                <i class="fa fa-info-circle" aria-hidden="true"></i
+                ><span>Help</span>
+              </button>
+              <button>
+                <i class="fa fa-sign-out" aria-hidden="true"></i
+                ><span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <div class="tabs">
+          <div id="dashboard" class="forms animation">
+            <form id="main-form">
+              <div class="name common">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Full Name" />
+              </div>
+              <div class="dob common">
+                <label for="dob">DOB:</label>
+                <input type="date" placeholder="Date of birth" id="dob" />
+              </div>
+              <div class="aadhar common">
+                <label for="aadhar"
+                  >Aadhar Number: <span style="color: red">*</span></label
+                >
+                <input type="text" placeholder="aadhar number" id="aadhar" />
+              </div>
+              <div class="address common">
+                <label for="address">Address:</label>
+                <div>
+                  <input type="text" id="address1" placeholder="address 1" />
+                  <input type="text" id="address2" placeholder="address 2" />
+                  <input type="text" id="address3" placeholder="address 3" />
+                </div>
+              </div>
+              <div class="mobile common">
+                <label for="mobile"
+                  >Mobile Number: <span style="color: red">*</span></label
+                >
+                <input type="text" id="mobile" placeholder="mobile number" />
+                <div class="preloader-container">
+                  <div class="preloader-tub">
+                    <div class="preloader"></div>
+                    <p>waiting for verification</p>
+                  </div>
+                  <div class="success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <p>Mobile number verified successfully</p>
+                  </div>
+                  <div class="fail">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <p>failed to verify your mobile number.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="notes">
+                <h3>Note:</h3>
+                <ul>
+                  <li>
+                    If mobile verification fails, try again by pressing the
+                    reset button.
+                  </li>
+                  <li>Input fields with the astrik are must to be filled.</li>
+                  <li>
+                    Enter proper Aadhar number without the hiphon eg:-
+                    1234567891
+                    <strike>1234-2345-12345</strike>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="buttons">
+                <button type="button" id="main-submit" aria-disabled="true">
+                  Submit
+                </button>
+                <button type="reset" id="reset" aria-disabled="true">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+          <div id="profile" class="forms">profile page</div>
+        </div>
+      </div>
+    </section>
+    <section class="otp-container">
+      <form class="otp-form">
+        <div class="preloader-container-2">
+          <div class="preloader"></div>
+          <p>verifying otp</p>
+        </div>
+        <div class="messages">
+          <div class="success">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <p>OTP verified successfully</p>
+          </div>
+          <div class="fail">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            <p>Entered OTP is incorrect.</p>
+          </div>
+        </div>
+        <div class="info">
+          <h1 style="margin-bottom: 1rem">Enter your OTP</h1>
+          <p>
+            One time OTP password for eKYC registration has been sent to your
+            mobile number
+            <span>+91902XXXXX18</span>. Kindly enter the otp in the text below.
+          </p>
+        </div>
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="enter your otp"
+            id="otp-number"
+            required
+            autocomplete="one-time-code"
+            inputmode="numeric"
+          />
+        </div>
+        <div class="buttons">
+          <button type="button" id="verify">submit</button>
+          <button type="reset" id="reset">resend otp</button>
+          <button type="reset" id="cancel">cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <script>
+      let result = null;
+      const sidebutton = document.querySelector(".sidebar-navbar button");
+      const tabsContainer = document.querySelector(".tabs-container");
+      const sidebarButtons = document.querySelectorAll(".sidebarButton");
+      const forms = document.querySelectorAll(".forms");
+      const sidebarNavbarIcons = document.querySelectorAll(
+        ".sidebar-navbar img"
+      );
+      // const logo1 = document.querySelector("#logo1");
+      const logo2 = document.querySelector("#logo2");
+
+      const homeIcon = document.querySelector(".fa-home");
+      const profileIcon = document.querySelector(".fa-user");
+
+      const otpContainer = document.querySelector(".otp-container");
+      const otpNumber = document.querySelector("#otp-number");
+      const verify = document.querySelector("#verify");
+      const reset = document.querySelector("#dashboard form .buttons #reset");
+      const mainSubmit = document.getElementById("main-submit");
+
+      const name = document.getElementById("name");
+      const dob = document.getElementById("dob");
+      const aadhar = document.getElementById("aadhar");
+      const mobileNumber = document.querySelector("#mobile");
+
+      const address1 = document.getElementById("address1");
+      const address2 = document.getElementById("address2");
+      const address3 = document.getElementById("address3");
+
+      const profilePicture = document.querySelector(
+        ".profile-container figure"
+      );
+      const submenu = document.querySelector(".profile-container .submenu");
+
+      const preloader = document.querySelector(".preloader-container");
+      const preloaderTube = document.querySelector(
+        ".preloader-container .preloader-tub"
+      );
+      const preloaderSuccess = document.querySelector(
+        ".preloader-container .success"
+      );
+      const preloaderFail = document.querySelector(
+        ".preloader-container .fail"
+      );
+
+      const preloader2 = document.querySelector(".preloader-container-2");
+
+      const success = document.querySelector(".otp-form .messages .success");
+      const fail = document.querySelector(".otp-form .messages .fail");
+      const cancel = document.querySelector("#cancel");
+
+      function showContainer(e) {
+        const title = e.target.innerText.toLowerCase();
+        console.log(e);
+        forms.forEach((item) => {
+          if (item.getAttribute("id") === title) {
+            item.style.display = "flex";
+            item.classList.add("animation");
+            this.classList.add("sidebar-button-active");
+          } else {
+            item.style.display = "none";
+            sidebarButtons.forEach((button) => {
+              if (button !== this) {
+                button.classList.remove("sidebar-button-active");
+              }
+            });
+          }
+        });
+      }
+
+      function showSubmenu(e) {
+        submenu.classList.toggle("showSubmenu");
+      }
+
+      function checkMobile() {
+        const number = mobileNumber.innerText;
+        if (number.length === 10) {
+          console.log("10 digits");
+        }
+      }
+
+      sidebarButtons.forEach((button) => {
+        button.addEventListener("click", showContainer);
+      });
+
+      // sidebar button icon
+      sidebutton.addEventListener("click", () => {
+        tabsContainer.classList.toggle("tabs-container-active");
+        // logo1.classList.toggle("inactive");
+        logo2.classList.toggle("inactive");
+      });
+
+      // submenu
+      profilePicture.addEventListener("click", showSubmenu);
+      profilePicture.addEventListener("mouseenter", showSubmenu);
+
+      window.addEventListener("click", () =>
+        submenu.classList.remove("showSubmenu")
+      );
+
+
+      mobileNumber.addEventListener("keyup", (e) => {
+        const number = e.target.value;
+        if (number.length == 10) {
+          mobileNumber.disabled = "true";
+          preloaderTube.style.display = "flex";
+          setTimeout(() => {
+            otpContainer.style.display = "flex";
+          }, 3000);
+        }
+      });
+
+      verify.addEventListener("click", (e) => {
+        e.preventDefault();
+        preloader2.style.display = "flex";
+        if (otpNumber.value == 12345) {
+          result = true;
+          setTimeout(() => {
+            preloader2.style.display = "none";
+            success.style.display = "flex";
+          }, 2000);
+          setTimeout(() => {
+            otpContainer.style.display = "none";
+            preloaderTube.style.display = "none";
+            preloaderSuccess.style.display = "flex";
+          }, 4000);
+        }
+
+        if (otpNumber.value === "") {
+          alert("enter your otp in the input box.");
+          preloader2.style.display = "none";
+        }
+
+        if (otpNumber.value !== "12345") {
+          result = false;
+          setTimeout(() => {
+            preloader2.style.display = "none";
+            fail.style.display = "flex";
+          }, 2000);
+          setTimeout(() => {
+            otpContainer.style.display = "none";
+            preloaderTube.style.display = "none";
+            preloaderFail.style.display = "flex";
+          }, 4000);
+        }
+
+        mainSubmit.removeAttribute("disabled");
+        reset.removeAttribute("disabled");
+      });
+
+      cancel.addEventListener("click", () => {
+        otpContainer.style.display = "none";
+      });
+
+      reset.addEventListener("click", () => {
+        preloaderTube.style.display = "none";
+        preloaderFail.style.display = "none";
+        preloaderSuccess.style.display = "none";
+        preloader2.style.display = "none";
+        mobileNumber.removeAttribute("disabled");
+      });
+
+      mainSubmit.addEventListener("click", (e) => {
+        e.preventDefault();
+        const address =
+          address1.value + "," + address2.value + "," + address3.value;
+        console.log(address);
+        const obj = {
+          id: "",
+          name: "",
+          dob: "",
+          aadhar: "",
+          address: "",
+          mobile: "",
+        };
+
+        if (result) {
+          obj.mobile = mobileNumber.value;
+          obj.aadhar = aadhar.value;
+          obj.name = name.value;
+          obj.dob = dob.value;
+          obj.address = address;
+          obj.id = new Date().getMilliseconds();
+        }
+        if (!result) {
+          alert("pleaes try again.");
+        }
+        return console.log(obj);
+      });
+    </script>
+  </body>
+</html>

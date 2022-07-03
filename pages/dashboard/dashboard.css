@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+
+
+
 * {
   padding: 0;
   margin: 0;
@@ -27,9 +32,10 @@ button {
   cursor: pointer;
 }
 body {
-  background-color: whitesmoke;
+  background-color: #f9f9f9;
   font-size: 1rem;
   font-family: var(--font-primary);
+  font-family: "Poppins", sans-serif;
 }
 
 a {
@@ -37,42 +43,86 @@ a {
   color: black;
 }
 
+li {
+  list-style-type: none;
+}
+
 .dashboard {
   width: 100vw;
   height: 100vh;
-  background: gray;
   display: relative;
 }
 
 .sidebar {
   height: 100%;
-  background-color: var(--ternary-color);
+  background-color: #f9f9f9;
   position: fixed;
   left: 0;
   right: 0;
-  width: 15vw;
+  width: 20vw;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.5rem 0 0 0.5rem;
+}
+
+.links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.links li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.links li:hover {
+  border-left: 5px solid #01684f;
+}
+
+.links li a:nth-child(1) {
+  width: 60px;
+  height: 60px;
+  background: blue;
+  border-radius: 100%;
+}
+
+.links li a:nth-child(1):hover {
+  background-color: #01684f;
+  box-shadow: 0 0 2px 5px blueviolet;
+}
+
+.links li a:nth-child(2) {
+  font-size: 2rem;
+  margin-left: 1.5rem;
 }
 
 .dash__container {
   height: 100%;
-  width: 95vw;
-  background: #01684f;
+  width: 93vw;
   position: absolute;
   top: 0;
   right: 0;
   transition: all 200ms ease-in-out;
+  background-color: #f9f9f9;
+  border-left: 10px solid var(--ternary-color);
 }
 
 .active {
-  width: 85vw;
+  width: 80vw;
 }
 
 .header-bar {
   position: absolute;
   top: 0;
   left: 0;
-  background: blue;
+  background: #f9f9f9;
   width: 100%;
   padding: 1rem;
   display: flex;
@@ -90,26 +140,33 @@ a {
   height: 50px;
   background: yellow;
 }
-.sidebar-bank-logo{
- width: 200px;
-  height: 50px;
-  background: yellow;
-  margin-left: 1rem;
-  opacity: 1;
-  transition: all 200ms linear;
+
+.bank-symbol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 50ms ease-in-out;
 }
 
-.bank-logo {
+.sidebar-bank-logo {
+  object-fit: contain;
   width: 200px;
-  height: 50px;
-  background: yellow;
-  margin-left: 1rem;
-  opacity: 1;
-  transition: all 200ms linear;
+  height: 40px;
+  background: var(--secondary-color);
+  opacity: 0;
+  transition: all 100ms ease-in;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 1.5rem;
 }
 
-.show-logo {
-  opacity: 0
+.show-symbol {
+  display: none;
+}
+
+.show-sidebar-bank-logo {
+  opacity: 1;
+  margin-left: 0rem;
 }
 
 .right__container {
