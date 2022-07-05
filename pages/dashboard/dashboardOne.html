@@ -269,6 +269,7 @@
       const dobFailAlert = document.querySelector(".dob-fail");
       const aadharFailAlert = document.querySelector(".aadhar-fail");
       const addressFailAlert = document.querySelector(".address-fail");
+      const state = document.getElementById("state");
 
       // Otp Container
       const preloader2 = document.querySelector(".preloader-container-2");
@@ -371,9 +372,6 @@
       });
 
       mobileNumber.addEventListener("click", () => {
-        {
-          console.log(this);
-        }
         if (name.value === "") {
           name.style.border = "2px solid red";
           nameFailAlert.style.display = "flex";
@@ -498,10 +496,7 @@
         e.preventDefault();
         const address =
           address1.value + "," + address2.value + "," + address3.value;
-        console.log(aadhar1.value, aadhar2.value, aadhar3.value);
-
-        const aadhar =
-          aadhar1.value + aadhar2.value  + aadhar3.value;
+        const aadhar = aadhar1.value + aadhar2.value + aadhar3.value;
         const obj = {
           id: "",
           name: "",
