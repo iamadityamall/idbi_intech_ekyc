@@ -337,6 +337,14 @@
       // window.addEventListener("click", () =>
       //   submenu.classList.remove("showSubmenu")
       // );
+      aadharInputs.forEach((input) => {
+        input.addEventListener("keypress", function (e) {
+          var char = String.fromCharCode(e.which);
+          if (!/[0-9]/.test(char)) {
+            e.preventDefault();
+          }
+        });
+      });
 
       aadhar1.addEventListener("keyup", function (e) {
         const length = e.target.value.length;
@@ -376,7 +384,7 @@
           dobFailAlert.style.display = "flex";
           mobileNumber.setAttribute("disabled", true);
         }
-        if (!aadhar1.value || !aadhar2.value || aadhar3) {
+        if (!aadhar1.value || !aadhar2.value || !aadhar3) {
           aadhar1.style.border = "2px solid red";
           aadhar2.style.border = "2px solid red";
           aadhar3.style.border = "2px solid red";
