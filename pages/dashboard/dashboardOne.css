@@ -325,6 +325,7 @@ img {
   border-radius: 10px;
   font-size: 0.75rem;
   margin-top: 10px;
+  /* width: 65%; */
 }
 .notes ul {
   margin-left: 3rem;
@@ -341,6 +342,7 @@ img {
 
 .forms form .common {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   font-size: 0.85rem;
   font-family: var(--font-primary);
@@ -374,7 +376,7 @@ img {
   outline: 2px solid var(--secondary-color);
 }
 
-.forms form .address div {
+.forms form .address .address-container {
   display: flex;
   flex-direction: column;
 }
@@ -417,6 +419,20 @@ img {
   color: white;
 }
 
+.aadhar-inputs {
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  width: 20rem;
+}
+
+.aadhar-inputs span {
+  padding: 0 5px 0 5px;
+}
+
+.aadhar-inputs input {
+  width: 5rem !important;
+}
 .preloader-container {
   display: flex;
   flex-direction: column;
@@ -465,6 +481,29 @@ img {
   font-weight: bold;
   font-size: 12px;
   text-transform: capitalize;
+}
+
+.name-fail,
+.dob-fail,
+.aadhar-fail,
+.address-fail {
+  margin-left: 2rem;
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  color: red;
+  font-size: 0.75rem;
+}
+
+.name-fail p,
+.dob-fail p,
+.aadhar-fail p,
+.address-fail p {
+  margin-left: 5px;
+}
+
+.active {
+  display: flex;
 }
 
 @keyframes rotate {

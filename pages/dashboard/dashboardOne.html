@@ -69,25 +69,67 @@
           <div id="dashboard" class="forms animation">
             <form id="main-form">
               <div class="name common">
-                <label for="name">Name:</label>
+                <label for="name"
+                  >Name:
+                  <span style="color: red; margin-left: 10px">*</span></label
+                >
                 <input type="text" id="name" placeholder="Full Name" />
+                <div class="name-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>Name field cannot be empty</p>
+                </div>
               </div>
               <div class="dob common">
-                <label for="dob">DOB:</label>
+                <label for="dob"
+                  >DOB:
+                  <span style="color: red; margin-left: 10px">*</span></label
+                >
                 <input type="date" placeholder="Date of birth" id="dob" />
+                <div class="dob-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>Kindly select your date of birth</p>
+                </div>
               </div>
               <div class="aadhar common">
                 <label for="aadhar"
-                  >Aadhar Number: <span style="color: red">*</span></label
+                  >Aadhar Number:
+                  <span style="color: red; margin-left: 10px">*</span></label
                 >
-                <input type="text" placeholder="aadhar number" id="aadhar" />
+                <div class="aadhar-inputs">
+                  <input
+                    type="text"
+                    placeholder="XXXX"
+                    id="aadhar-1"
+                    maxlength="4"
+                  /><span>-</span>
+                  <input
+                    type="text"
+                    placeholder="XXXX"
+                    id="aadhar-2"
+                    maxlength="4"
+                  /><span>-</span>
+                  <input
+                    type="text"
+                    placeholder="XXXX"
+                    id="aadhar-3"
+                    maxlength="4"
+                  />
+                </div>
+                <div class="aadhar-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>aadhar field cannot be empty</p>
+                </div>
               </div>
               <div class="address common">
                 <label for="address">Address:</label>
-                <div>
+                <div class="address-container">
                   <input type="text" id="address1" placeholder="address 1" />
                   <input type="text" id="address2" placeholder="address 2" />
                   <input type="text" id="address3" placeholder="address 3" />
+                </div>
+                <div class="address-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>address field cannot be empty</p>
                 </div>
               </div>
               <div class="mobile common">
@@ -114,6 +156,7 @@
               <div class="notes">
                 <h3>Note:</h3>
                 <ul>
+                  <li>Enter your name as mentioned in aadhar card.</li>
                   <li>
                     If mobile verification fails, try again by pressing the
                     reset button.
@@ -220,7 +263,12 @@
       const address3 = document.getElementById("address3");
       const reset = document.querySelector("#dashboard form .buttons #reset");
       const mainSubmit = document.getElementById("main-submit");
-      const buttons = document.querySelectorAll(".forms input");
+      const inputs = document.querySelectorAll(".forms input");
+      const aadharInputs = document.querySelectorAll(".aadhar-inputs input");
+      const nameFailAlert = document.querySelector(".name-fail");
+      const dobFailAlert = document.querySelector(".dob-fail");
+      const aadharFailAlert = document.querySelector(".aadhar-fail");
+      const addressFailAlert = document.querySelector(".address-fail");
 
       // Otp Container
       const preloader2 = document.querySelector(".preloader-container-2");
@@ -233,9 +281,13 @@
       const otpContainer = document.querySelector(".otp-container");
       const otpNumber = document.querySelector("#otp-number");
       const verify = document.querySelector("#verify");
+      const aadhar1 = document.querySelector("#aadhar-1");
+      const aadhar2 = document.querySelector("#aadhar-2");
+      const aadhar3 = document.querySelector("#aadhar-3");
 
       // Variables declaration
       let result = null;
+      const detailsArr = [];
 
       // Functions declaration
 
@@ -286,6 +338,60 @@
       //   submenu.classList.remove("showSubmenu")
       // );
 
+      aadhar1.addEventListener("keyup", function (e) {
+        const length = e.target.value.length;
+        const maxlength = parseInt(this.getAttribute("maxlength"));
+        if (length === maxlength) {
+          aadhar2.focus();
+        }
+      });
+
+      aadhar2.addEventListener("keyup", function (e) {
+        const length = e.target.value.length;
+        const maxlength = parseInt(this.getAttribute("maxlength"));
+        if (length === maxlength) {
+          aadhar3.focus();
+        }
+      });
+
+      aadhar3.addEventListener("keyup", function (e) {
+        const length = e.target.value.length;
+        const maxlength = parseInt(this.getAttribute("maxlength"));
+        if (length === maxlength) {
+          address1.focus();
+        }
+      });
+
+      mobileNumber.addEventListener("click", () => {
+        {
+          console.log(this);
+        }
+        if (name.value === "") {
+          name.style.border = "2px solid red";
+          nameFailAlert.style.display = "flex";
+          mobileNumber.setAttribute("disabled", true);
+        }
+        if (dob.value === "") {
+          dob.style.border = "2px solid red";
+          dobFailAlert.style.display = "flex";
+          mobileNumber.setAttribute("disabled", true);
+        }
+        if (!aadhar1.value || !aadhar2.value || aadhar3) {
+          aadhar1.style.border = "2px solid red";
+          aadhar2.style.border = "2px solid red";
+          aadhar3.style.border = "2px solid red";
+          aadharFailAlert.style.display = "flex";
+          mobileNumber.setAttribute("disabled", true);
+        }
+        if (!address1.value && !address2.value && !address3.value) {
+          address1.style.border = "2px solid red";
+          address2.style.border = "2px solid red";
+          address3.style.border = "2px solid red";
+          addressFailAlert.style.display = "flex";
+          mobileNumber.setAttribute("disabled", true);
+        }
+      });
+
       mobileNumber.addEventListener("keyup", (e) => {
         const number = e.target.value;
         if (number.length == 10) {
@@ -295,6 +401,15 @@
             otpContainer.style.display = "flex";
           }, 3000);
         }
+      });
+
+      inputs.forEach((input) => {
+        input.addEventListener("keydown", () => {
+          input.setAttribute(
+            "oninput",
+            "this.value = this.value.toUpperCase()"
+          );
+        });
       });
 
       // otp control login
@@ -314,8 +429,8 @@
             preloaderSuccess.style.display = "flex";
           }, 4000);
 
-          buttons.forEach((button) => {
-            button.setAttribute("disabled", true);
+          inputs.forEach((input) => {
+            input.setAttribute("disabled", true);
           });
         }
 
@@ -354,7 +469,20 @@
         otpMessages.querySelector(".success").style.display = "none";
         otpMessages.querySelector(".fail").style.display = "none";
         otpBox.value = "";
-        buttons.forEach((button) => button.removeAttribute("disabled"));
+        inputs.forEach((button) => button.removeAttribute("disabled"));
+        nameFailAlert.style.display = "none";
+        addressFailAlert.style.display = "none";
+        aadharFailAlert.style.display = "none";
+        dobFailAlert.style.display = "none";
+
+        name.style.border = "none";
+        dob.style.border = "none";
+        address1.style.border = "none";
+        address2.style.border = "none";
+        address3.style.border = "none";
+        aadhar1.style.border = "none";
+        aadhar2.style.border = "none";
+        aadhar3.style.border = "none";
         console.log("reset");
       });
 
@@ -371,7 +499,6 @@
           address: "",
           mobile: "",
         };
-
         if (result) {
           obj.mobile = mobileNumber.value;
           obj.aadhar = aadhar.value;
@@ -381,9 +508,10 @@
           obj.id = new Date().getMilliseconds();
         }
         if (!result) {
-          alert("pleaes try again.");
+          alert("please try again.");
         }
-        return console.log(obj);
+        detailsArr.push(obj);
+        return console.log(detailsArr);
       });
     </script>
   </body>
