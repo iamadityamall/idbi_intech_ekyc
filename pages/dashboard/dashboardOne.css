@@ -188,6 +188,10 @@ img {
   cursor: pointer;
 }
 
+.profile-container:hover .submenu {
+  display: flex;
+}
+
 .profile-container figure img {
   padding: 1px;
 }
@@ -202,7 +206,7 @@ img {
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.6);
   border-radius: 2px;
   animation: fade-out 200ms;
-  margin-top: 0.75rem;
+  margin-top: 0rem;
   width: 200px;
   /* height: 400px; */
   display: none;
@@ -608,4 +612,9 @@ img {
   font-weight: bold;
   font-size: 14px;
   text-transform: capitalize;
+}
+
+.disabled {
+  background: rgba(255, 255, 255, 0.8);
+  cursor: none;
 }

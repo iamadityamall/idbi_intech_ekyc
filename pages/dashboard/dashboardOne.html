@@ -128,12 +128,8 @@
               </div>
 
               <div class="buttons">
-                <button type="button" id="main-submit" aria-disabled="true">
-                  Submit
-                </button>
-                <button type="reset" id="reset" aria-disabled="true">
-                  Reset
-                </button>
+                <button type="button" id="main-submit">Submit</button>
+                <button type="reset" id="reset">Reset</button>
               </div>
             </form>
           </div>
@@ -184,40 +180,27 @@
     </section>
 
     <script>
-      let result = null;
+      // sidebar
       const sidebutton = document.querySelector(".sidebar-navbar button");
-      const tabsContainer = document.querySelector(".tabs-container");
       const sidebarButtons = document.querySelectorAll(".sidebarButton");
-      const forms = document.querySelectorAll(".forms");
       const sidebarNavbarIcons = document.querySelectorAll(
         ".sidebar-navbar img"
       );
+
       // const logo1 = document.querySelector("#logo1");
       const logo2 = document.querySelector("#logo2");
 
-      const homeIcon = document.querySelector(".fa-home");
-      const profileIcon = document.querySelector(".fa-user");
+      // Tabcontainer
+      const tabsContainer = document.querySelector(".tabs-container");
 
-      const otpContainer = document.querySelector(".otp-container");
-      const otpNumber = document.querySelector("#otp-number");
-      const verify = document.querySelector("#verify");
-      const reset = document.querySelector("#dashboard form .buttons #reset");
-      const mainSubmit = document.getElementById("main-submit");
-
-      const name = document.getElementById("name");
-      const dob = document.getElementById("dob");
-      const aadhar = document.getElementById("aadhar");
-      const mobileNumber = document.querySelector("#mobile");
-
-      const address1 = document.getElementById("address1");
-      const address2 = document.getElementById("address2");
-      const address3 = document.getElementById("address3");
-
+      // Tabcontainer Header
       const profilePicture = document.querySelector(
         ".profile-container figure"
       );
       const submenu = document.querySelector(".profile-container .submenu");
 
+      // Forms
+      const forms = document.querySelectorAll(".forms");
       const preloader = document.querySelector(".preloader-container");
       const preloaderTube = document.querySelector(
         ".preloader-container .preloader-tub"
@@ -228,13 +211,35 @@
       const preloaderFail = document.querySelector(
         ".preloader-container .fail"
       );
+      const name = document.getElementById("name");
+      const dob = document.getElementById("dob");
+      const aadhar = document.getElementById("aadhar");
+      const mobileNumber = document.querySelector("#mobile");
+      const address1 = document.getElementById("address1");
+      const address2 = document.getElementById("address2");
+      const address3 = document.getElementById("address3");
+      const reset = document.querySelector("#dashboard form .buttons #reset");
+      const mainSubmit = document.getElementById("main-submit");
+      const buttons = document.querySelectorAll(".forms input");
 
+      // Otp Container
       const preloader2 = document.querySelector(".preloader-container-2");
-
       const success = document.querySelector(".otp-form .messages .success");
       const fail = document.querySelector(".otp-form .messages .fail");
       const cancel = document.querySelector("#cancel");
+      const otpForm = document.getElementById("#otp-form");
+      const otpMessages = document.querySelector(".otp-form .messages");
+      const otpBox = document.querySelector(".otp-form .input-box input");
+      const otpContainer = document.querySelector(".otp-container");
+      const otpNumber = document.querySelector("#otp-number");
+      const verify = document.querySelector("#verify");
 
+      // Variables declaration
+      let result = null;
+
+      // Functions declaration
+
+      // 1. Show and hide sidebar with button click
       function showContainer(e) {
         const title = e.target.innerText.toLowerCase();
         console.log(e);
@@ -254,17 +259,14 @@
         });
       }
 
-      function showSubmenu(e) {
-        submenu.classList.toggle("showSubmenu");
-      }
+      // 2. Showing submenus when hover on profile pic in tab-nav
+      // function showSubmenu(e) {
+      //   submenu.classList.toggle("showSubmenu");
+      // }
 
-      function checkMobile() {
-        const number = mobileNumber.innerText;
-        if (number.length === 10) {
-          console.log("10 digits");
-        }
-      }
+      // Adding Eventlisteners
 
+      // 1. adding evenetlisteners to sidebar buttons
       sidebarButtons.forEach((button) => {
         button.addEventListener("click", showContainer);
       });
@@ -277,12 +279,12 @@
       });
 
       // submenu
-      profilePicture.addEventListener("click", showSubmenu);
-      profilePicture.addEventListener("mouseenter", showSubmenu);
+      // profilePicture.addEventListener("click", showSubmenu);
+      // profilePicture.addEventListener("mouseenter", showSubmenu);
 
-      window.addEventListener("click", () =>
-        submenu.classList.remove("showSubmenu")
-      );
+      // window.addEventListener("click", () =>
+      //   submenu.classList.remove("showSubmenu")
+      // );
 
       mobileNumber.addEventListener("keyup", (e) => {
         const number = e.target.value;
@@ -295,11 +297,13 @@
         }
       });
 
+      // otp control login
       verify.addEventListener("click", (e) => {
         e.preventDefault();
         preloader2.style.display = "flex";
         if (otpNumber.value == 12345) {
           result = true;
+          otpMessages.style.display = "flex";
           setTimeout(() => {
             preloader2.style.display = "none";
             success.style.display = "flex";
@@ -309,6 +313,10 @@
             preloaderTube.style.display = "none";
             preloaderSuccess.style.display = "flex";
           }, 4000);
+
+          buttons.forEach((button) => {
+            button.setAttribute("disabled", true);
+          });
         }
 
         if (otpNumber.value === "") {
@@ -343,6 +351,11 @@
         preloaderSuccess.style.display = "none";
         preloader2.style.display = "none";
         mobileNumber.removeAttribute("disabled");
+        otpMessages.querySelector(".success").style.display = "none";
+        otpMessages.querySelector(".fail").style.display = "none";
+        otpBox.value = "";
+        buttons.forEach((button) => button.removeAttribute("disabled"));
+        console.log("reset");
       });
 
       mainSubmit.addEventListener("click", (e) => {
