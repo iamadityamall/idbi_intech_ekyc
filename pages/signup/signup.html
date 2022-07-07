@@ -206,35 +206,61 @@
           </div>
 
           <div class="hero-form__container__input">
+            <div class="fail-username">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>username cannot be empty</p>
+            </div>
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/user.svg" alt="" />
               </div>
-              <input type="text" placeholder="username" />
+              <input type="text" placeholder="username" id="username" />
+            </div>
+            <div class="fail-email">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>email cannot be empty</p>
             </div>
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/message.svg" alt="" />
               </div>
-              <input type="email" placeholder="email" />
+              <input type="email" placeholder="email" id="email" />
             </div>
+            <div class="fail-phone">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>phone cannot be empty</p>
+            </div>
+
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/phone.svg" alt="" />
               </div>
-              <input type="tel" placeholder="mobile number" />
+              <input type="tel" placeholder="mobile number" id="phone" />
+            </div>
+
+            <div class="fail-password">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>password cannot be empty</p>
             </div>
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/lock.svg" alt="" />
               </div>
-              <input type="password" placeholder="password" />
+              <input type="password" placeholder="password" id="password" />
+            </div>
+            <div class="fail-retypepassword">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>password didnot match</p>
             </div>
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/lock.svg" alt="" />
               </div>
-              <input type="password" placeholder="Re-type password" />
+              <input
+                type="password"
+                placeholder="Re-type password"
+                id="retypepassword"
+              />
             </div>
           </div>
           <!-- 
@@ -249,7 +275,7 @@
           </div> -->
 
           <div class="hero-form__container__button">
-            <button>Create an account</button>
+            <button id="create-button">Create an account</button>
             <p>or</p>
             <button
               style="
@@ -280,13 +306,74 @@
     </section>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init({
-        delay: 100, // values from 0 to 3000, with step 50ms
-        duration: 400, // values from 0 to 3000, with step 50ms
-        easing: "ease", // default easing for AOS animations
-        once: false,
+      const failUsername = document.querySelector(".fail-username");
+      const failEmail = document.querySelector(".fail-email");
+      const failPhone = document.querySelector(".fail-phone");
+      const failPassword = document.querySelector(".fail-password");
+      const failReTypePassword = document.querySelector(".fail-retypepassword");
+
+      const usernameInput = document.getElementById("username");
+      const emailInput = document.getElementById("email");
+      const phoneInput = document.getElementById("phone");
+      const passwordInput = document.getElementById("password");
+      const retypepasswordInput = document.getElementById("retypepassword");
+
+      const createAccountButton = document.getElementById("create-button");
+
+      function checkDetails(e) {
+        e.preventDefault();
+        if (!usernameInput.value) {
+          failUsername.style.display = "flex";
+          usernameInput.style.border = "2px solid red";
+        }
+        if (!emailInput.value) {
+          failEmail.style.display = "flex";
+          emailInput.style.border = "2px solid red";
+        }
+        if (!phoneInput.value) {
+          failPhone.style.display = "flex";
+          phoneInput.style.border = "2px solid red";
+        }
+        if (!passwordInput.value) {
+          failPassword.style.display = "flex";
+          passwordInput.style.border = "2px solid red";
+        }
+        if (passwordInput.value !== retypepasswordInput.value) {
+          failReTypePassword.style.display = "flex";
+          retypepasswordInput.style.border = "2px solid red";
+        }
+      }
+
+      usernameInput.setAttribute(
+        "oninput",
+        "this.value = this.value.toUpperCase()"
+      );
+      createAccountButton.addEventListener("click", checkDetails);
+
+      usernameInput.addEventListener("keydown", () => {
+        failUsername.style.display = "none";
+        usernameInput.style.border = "none";
+      });
+
+      emailInput.addEventListener("keydown", () => {
+        failEmail.style.display = "none";
+        emailInput.style.border = "none";
+      });
+
+      phoneInput.addEventListener("keydown", () => {
+        failPhone.style.display = "none";
+        phoneInput.style.border = "none";
+      });
+
+      passwordInput.addEventListener("keydown", () => {
+        failPassword.style.display = "none";
+        passwordInput.style.border = "none";
+      });
+
+      retypepasswordInput.addEventListener("keydown", () => {
+        failReTypePassword.style.display = "none";
+        retypepasswordInput.style.border = "none";
       });
     </script>
-    <script src="./login.js" />
   </body>
 </html>

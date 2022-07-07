@@ -331,6 +331,7 @@ input:focus-within {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: var(--padding-regular-3);
+  position: relative;
 }
 
 .input__container {
@@ -341,6 +342,41 @@ input:focus-within {
   overflow: hidden;
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.4);
+}
+
+.fail-username,
+.fail-email,
+.fail-phone,
+.fail-password,
+.fail-retypepassword {
+  font-size: 8px;
+  display: none;
+  align-items: center;
+  color: red;
+  position: absolute;
+  right: 5%;
+}
+
+.fail-username p {
+  margin-left: 5px;
+}
+
+.fail-username {
+  top: -4%;
+}
+
+.fail-email {
+  top: 17%;
+}
+.fail-phone {
+  top: 38%;
+}
+.fail-password {
+  top: 59%;
+}
+
+.fail-retypepassword {
+  top: 79%;
 }
 
 .icon {

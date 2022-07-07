@@ -130,7 +130,7 @@ input:focus-within {
   overflow: hidden;
   display: grid;
   grid-template-columns: 60vw 40vw;
-} 
+}
 
 .hero__container::before {
   content: "";
@@ -307,7 +307,8 @@ input:focus-within {
 .hero-form__container__input {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: var(--padding-regular-2);
+  row-gap: var(--padding-regular-1);
+  position: relative;
 }
 
 .input__container {
@@ -318,6 +319,40 @@ input:focus-within {
   overflow: hidden;
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.4);
+}
+
+.fail-username {
+  font-size: 8px;
+  display: none;
+  align-items: center;
+  color: red;
+  position: absolute;
+  top: -12%;
+  right: 10%;
+  /* background-color: white; */
+  z-index: 1000;
+}
+
+.fail-username p {
+  margin-left: 5px;
+}
+
+.fail-password {
+  font-size: 8px;
+  display: none;
+  align-items: center;
+  color: red;
+  position: absolute;
+  top: 45%;
+  right: 10%;
+}
+
+.fail-password p {
+  margin-left: 5px;
+}
+
+.fail-active {
+  border: 2px solid red;
 }
 
 .icon {
