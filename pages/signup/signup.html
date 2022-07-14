@@ -220,6 +220,10 @@
               <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
               <p>email cannot be empty</p>
             </div>
+            <div class="fail-email-invalid-char">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>invalid characters not allowed</p>
+            </div>
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/message.svg" alt="" />
@@ -230,12 +234,20 @@
               <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
               <p>phone cannot be empty</p>
             </div>
-
+            <div class="fail-phone-numbers">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <p>Mobile number must be of 10-digits</p>
+            </div>
             <div class="input__container">
               <div class="icon">
                 <img src="../../assests/logo/phone.svg" alt="" />
               </div>
-              <input type="tel" placeholder="mobile number" id="phone" />
+              <input
+                type="tel"
+                placeholder="mobile number"
+                id="phone"
+                maxlength="10"
+              />
             </div>
 
             <div class="fail-password">
@@ -308,7 +320,11 @@
     <script>
       const failUsername = document.querySelector(".fail-username");
       const failEmail = document.querySelector(".fail-email");
+      const failEmailInvalidChar = document.querySelector(
+        ".fail-email-invalid-char"
+      );
       const failPhone = document.querySelector(".fail-phone");
+      const failPhoneNumbers = document.querySelector(".fail-phone-numbers");
       const failPassword = document.querySelector(".fail-password");
       const failReTypePassword = document.querySelector(".fail-retypepassword");
 
@@ -321,28 +337,62 @@
       const createAccountButton = document.getElementById("create-button");
 
       function checkDetails(e) {
-        e.preventDefault();
         if (!usernameInput.value) {
+          e.preventDefault();
           failUsername.style.display = "flex";
           usernameInput.style.border = "2px solid red";
         }
-        if (!emailInput.value) {
-          failEmail.style.display = "flex";
-          emailInput.style.border = "2px solid red";
-        }
+
         if (!phoneInput.value) {
+          e.preventDefault();
           failPhone.style.display = "flex";
           phoneInput.style.border = "2px solid red";
         }
+
         if (!passwordInput.value) {
+          e.preventDefault();
           failPassword.style.display = "flex";
           passwordInput.style.border = "2px solid red";
         }
         if (passwordInput.value !== retypepasswordInput.value) {
+          e.preventDefault();
           failReTypePassword.style.display = "flex";
           retypepasswordInput.style.border = "2px solid red";
         }
+
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (emailInput.value.match(mailformat)) {
+          console.lg("valid email address");
+        } else {
+          if (!emailInput.value) {
+            e.preventDefault();
+            failEmail.style.display = "flex";
+            emailInput.style.border = "2px solid red";
+          } else {
+            e.preventDefault();
+            failEmailInvalidChar.style.display = "flex";
+          }
+        }
       }
+
+      emailInput.addEventListener("click", () => {
+        failEmailInvalidChar.style.display = "none";
+        failEmail.style.display = "none";
+        failEmail.style.border = "none";
+      });
+
+      phoneInput.addEventListener("keypress", function (e) {
+        var char = String.fromCharCode(e.which);
+        if (!/[0-9]/.test(char)) {
+          e.preventDefault();
+        }
+        if (phoneInput.value.length < 9) {
+          failPhoneNumbers.style.display = "flex";
+          failPhoneNumbers.style.color = "green";
+          phoneInput.style.border = "2px solid red";
+        }
+      });
 
       usernameInput.setAttribute(
         "oninput",
@@ -363,6 +413,7 @@
       phoneInput.addEventListener("keydown", () => {
         failPhone.style.display = "none";
         phoneInput.style.border = "none";
+        failPhoneNumbers.style.display = "none";
       });
 
       passwordInput.addEventListener("keydown", () => {

@@ -348,7 +348,8 @@ input:focus-within {
 .fail-email,
 .fail-phone,
 .fail-password,
-.fail-retypepassword {
+.fail-retypepassword,
+.fail-phone-numbers, .fail-email-invalid-char {
   font-size: 8px;
   display: none;
   align-items: center;
@@ -365,12 +366,19 @@ input:focus-within {
   top: -4%;
 }
 
-.fail-email {
+.fail-email, .fail-email-invalid-char {
   top: 17%;
 }
-.fail-phone {
+
+.fail-phone,
+.fail-phone-numbers {
   top: 38%;
 }
+
+.fail-phone-numbers {
+  right: -10%;
+}
+
 .fail-password {
   top: 59%;
 }
