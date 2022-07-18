@@ -10,6 +10,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script src="./HackTimer.js"></script>
   </head>
   <body>
     <section class="dashboard-section">
@@ -172,12 +173,55 @@
               </div>
 
               <div class="buttons">
-                <button type="button" id="main-submit">Submit</button>
+                <button type="button" id="main-submit" value="30">
+                  Submit
+                </button>
                 <button type="reset" id="reset">Reset</button>
               </div>
             </form>
           </div>
           <div id="profile" class="forms">profile page</div>
+        </div>
+      </div>
+      <div id="loader-verify">
+        <div class="timer">
+          <div class="controls">
+            <input id="duration" value="30" />
+            <div>
+              <button id="start"><i class="fas fa-play"></i></button>
+              <button id="pause"><i class="fas fa-pause"></i></button>
+            </div>
+          </div>
+          <div class="info">
+            <h1>
+              <span style="display: block; text-align: center">
+                Please wait.</span
+              >
+              Processing your ekyc request
+            </h1>
+            <div data-title=".dot-flashing" style="margin-left: 1.5rem">
+              <div class="stage">
+                <div class="dot-flashing"></div>
+              </div>
+            </div>
+          </div>
+          <svg class="dial">
+            <defs>
+              <filter id="f1" x="0" y="0" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                <feBlend in="SourceGraphic" in2="offOut" mode="normal" />
+              </filter>
+            </defs>
+            <circle
+              fill="transparent"
+              stroke="#01684F"
+              stroke-width="10"
+              r="250"
+              cx="-110"
+              cy="300"
+              transform="rotate(-90 100 100)"
+            />
+          </svg>
         </div>
       </div>
     </section>
@@ -271,6 +315,8 @@
       const aadharFailAlert = document.querySelector(".aadhar-fail");
       const addressFailAlert = document.querySelector(".address-fail");
       const state = document.getElementById("state");
+      const dashboard = document.getElementById("dashboard");
+      const loaderVerifyContainer = document.getElementById("loader-verify");
 
       // Otp Container
       const preloader2 = document.querySelector(".preloader-container-2");
@@ -519,6 +565,7 @@
 
       mainSubmit.addEventListener("click", (e) => {
         e.preventDefault();
+        timer.start();
         const address =
           address1.value + "," + address2.value + "," + address3.value;
         const aadhar = aadhar1.value + aadhar2.value + aadhar3.value;
@@ -539,7 +586,84 @@
           obj.id = new Date().getMilliseconds();
         }
         detailsArr.push(obj);
+        dashboard.style.filter = "blur(2px)";
+        loaderVerifyContainer.style.display = "block";
         return console.log(detailsArr);
+      });
+
+      // loader
+      class Timer {
+        constructor(durationInput, startButton, pauseButton, callbacks) {
+          this.durationInput = durationInput;
+          this.startButton = startButton;
+          this.pauseButton = pauseButton;
+          if (callbacks) {
+            this.onStart = callbacks.onStart;
+            this.onTick = callbacks.onTick;
+            this.onComplete = callbacks.onComplete;
+          }
+        }
+
+        start = () => {
+          if (this.onStart) {
+            this.onStart(this.timeRemaining);
+          }
+          this.tick();
+          this.interval = setInterval(this.tick, 10);
+        };
+
+        pause = () => {
+          clearInterval(this.interval);
+        };
+
+        tick = () => {
+          if (this.timeRemaining <= 0) {
+            this.pause();
+            if (this.onComplete) {
+              this.onComplete();
+            }
+            this.timeRemaining = 30;
+          } else {
+            this.timeRemaining = this.timeRemaining - 0.01;
+            if (this.onTick) {
+              this.onTick(this.timeRemaining);
+            }
+          }
+        };
+
+        get timeRemaining() {
+          return parseFloat(this.durationInput.value);
+        }
+        set timeRemaining(time) {
+          this.durationInput.value = time.toFixed(2);
+        }
+      }
+
+      const durationInput = document.getElementById("duration");
+      const startButton = document.getElementById("start");
+      const pauseButton = document.getElementById("pause");
+      const circle = document.querySelector("circle");
+
+      const perimeter = circle.getAttribute("r") * 2 * Math.PI;
+      circle.setAttribute("stroke-dasharray", perimeter);
+
+      let currentOffset = 0;
+      let duration;
+      const timer = new Timer(durationInput, startButton, pauseButton, {
+        onStart(totalDuration) {
+          duration = totalDuration;
+          console.log(totalDuration);
+        },
+        onTick(timeRemaining) {
+          circle.setAttribute(
+            "stroke-dashoffset",
+            (perimeter * timeRemaining) / duration - perimeter
+          );
+        },
+        onComplete() {
+          loaderVerifyContainer.style.display = "none";
+          dashboard.style.filter = "none";
+        },
       });
     </script>
   </body>
