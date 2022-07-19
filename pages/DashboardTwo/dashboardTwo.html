@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DashboardTwo</title>
+    <link rel="stylesheet" href="../DashboardTwo/dashboardTwo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <section class="dashboard-section">
+      <aside class="sidebar">
+        <nav class="sidebar-navbar">
+          <!-- <figure class="inactive" id="logo1">
+            <img src="../../assests/logo/idbi-symbol.png" />
+          </figure> -->
+          <figure id="logo2">
+            <img src="../../assests/logo/idbi-bank-logo.svg" alt="" />
+          </figure>
+          <button><i class="fa fa-bars"></i></button>
+        </nav>
+        <div class="sidebar-buttons-container">
+          <button class="sidebarButton sidebar-button-active">
+            <i class="fa fa-home"></i>
+            <span>dashboard</span>
+          </button>
+          <button class="sidebarButton">
+            <i class="fa fa-user"> </i>
+            <span>profile</span>
+          </button>
+        </div>
+      </aside>
+      <div class="tabs-container">
+        <nav class="tabs-navbar">
+          <div class="profile-container">
+            <div>
+              <h1>Welcome, user</h1>
+              <span>Last Login:Apr 11, 2022 10:10:18</span>
+            </div>
+
+            <figure>
+              <img src="../../assests/logo/logo2.png" alt="" />
+              <!-- <i class="fa fa-user"> </i> -->
+            </figure>
+            <div class="submenu">
+              <button><i class="fa fa-gear"></i><span>Settings</span></button>
+              <button>
+                <i class="fa fa-user" aria-hidden="true"></i><span>User</span>
+              </button>
+              <button>
+                <i class="fa fa-language" aria-hidden="true"></i
+                ><span>Language</span>
+              </button>
+              <button>
+                <i class="fa fa-info-circle" aria-hidden="true"></i
+                ><span>Help</span>
+              </button>
+              <button>
+                <i class="fa fa-sign-out" aria-hidden="true"></i
+                ><span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <div
+          class="tabs"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            flex-direction: column;
+          "
+        >
+          <h1>CIBIL</h1>
+          <h4>COMING SOON</h4>
+        </div>
+      </div>
+      <div id="loader-verify">
+        <div class="timer">
+          <div class="controls">
+            <input id="duration" value="3" />
+            <div>
+              <button id="start"><i class="fas fa-play"></i></button>
+              <button id="pause"><i class="fas fa-pause"></i></button>
+            </div>
+          </div>
+          <div class="infoo">
+            <h1>
+              <!-- <span style="display: block; text-align: center">
+                success</span
+              > -->
+              eKYC verification completed successfully
+            </h1>
+            <!-- <div data-title=".dot-flashing" style="margin-left: 1.5rem">
+              <div class="stage">
+                <div class="dot-flashing"></div>
+              </div>
+            </div> -->
+          </div>
+          <svg class="dial">
+            <defs>
+              <filter id="f1" x="0" y="0" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                <feBlend in="SourceGraphic" in2="offOut" mode="normal" />
+              </filter>
+            </defs>
+            <circle
+              fill="transparent"
+              stroke="#01684F"
+              stroke-width="10"
+              r="250"
+              cx="-110"
+              cy="300"
+              transform="rotate(-90 100 100)"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // sidebar
+      const sidebutton = document.querySelector(".sidebar-navbar button");
+      const sidebarButtons = document.querySelectorAll(".sidebarButton");
+      const sidebarNavbarIcons = document.querySelectorAll(
+        ".sidebar-navbar img"
+      );
+
+      // const logo1 = document.querySelector("#logo1");
+      const logo2 = document.querySelector("#logo2");
+
+      // Tabcontainer
+      const tabsContainer = document.querySelector(".tabs-container");
+
+      // Tabcontainer Header
+      const profilePicture = document.querySelector(
+        ".profile-container figure"
+      );
+      const submenu = document.querySelector(".profile-container .submenu");
+
+      // Functions declaration
+
+      // 1. Show and hide sidebar with button click
+      function showContainer(e) {
+        const title = e.target.innerText.toLowerCase();
+        forms.forEach((item) => {
+          if (item.getAttribute("id") === title) {
+            item.style.display = "flex";
+            item.classList.add("animation");
+            this.classList.add("sidebar-button-active");
+          } else {
+            item.style.display = "none";
+            sidebarButtons.forEach((button) => {
+              if (button !== this) {
+                button.classList.remove("sidebar-button-active");
+              }
+            });
+          }
+        });
+      }
+
+      // 2. Showing submenus when hover on profile pic in tab-nav
+      // function showSubmenu(e) {
+      //   submenu.classList.toggle("showSubmenu");
+      // }
+
+      // Adding Eventlisteners
+
+      // 1. adding evenetlisteners to sidebar buttons
+      sidebarButtons.forEach((button) => {
+        button.addEventListener("click", showContainer);
+      });
+
+      // sidebar button icon
+      sidebutton.addEventListener("click", () => {
+        tabsContainer.classList.toggle("tabs-container-active");
+        // logo1.classList.toggle("inactive");
+        logo2.classList.toggle("inactive");
+      });
+
+      // loader
+      class Timer {
+        constructor(durationInput, startButton, pauseButton, callbacks) {
+          this.durationInput = durationInput;
+          this.startButton = startButton;
+          this.pauseButton = pauseButton;
+          if (callbacks) {
+            this.onStart = callbacks.onStart;
+            this.onTick = callbacks.onTick;
+            this.onComplete = callbacks.onComplete;
+          }
+        }
+
+        start = () => {
+          if (this.onStart) {
+            this.onStart(this.timeRemaining);
+          }
+          this.tick();
+          this.interval = setInterval(this.tick, 10);
+        };
+
+        pause = () => {
+          clearInterval(this.interval);
+        };
+
+        tick = () => {
+          if (this.timeRemaining <= 0) {
+            this.pause();
+            if (this.onComplete) {
+              this.onComplete();
+            }
+            this.timeRemaining = 1;
+          } else {
+            this.timeRemaining = this.timeRemaining - 0.01;
+            if (this.onTick) {
+              this.onTick(this.timeRemaining);
+            }
+          }
+        };
+
+        get timeRemaining() {
+          return parseFloat(this.durationInput.value);
+        }
+        set timeRemaining(time) {
+          this.durationInput.value = time.toFixed(2);
+        }
+      }
+
+      const loaderVerifyContainer = document.getElementById("loader-verify");
+      const durationInput = document.getElementById("duration");
+      const startButton = document.getElementById("start");
+      const pauseButton = document.getElementById("pause");
+      const circle = document.querySelector("circle");
+
+      const perimeter = circle.getAttribute("r") * 2 * Math.PI;
+      circle.setAttribute("stroke-dasharray", perimeter);
+
+      let currentOffset = 0;
+      let duration;
+      const timer = new Timer(durationInput, startButton, pauseButton, {
+        onStart(totalDuration) {
+          duration = totalDuration;
+          // console.log(totalDuration);
+        },
+        onTick(timeRemaining) {
+          circle.setAttribute(
+            "stroke-dashoffset",
+            (perimeter * timeRemaining) / duration - perimeter
+          );
+        },
+        onComplete() {
+          loaderVerifyContainer.style.display = "none";
+          dashboard.style.filter = "none";
+        },
+      });
+      timer.start();
+    </script>
+  </body>
+</html>
