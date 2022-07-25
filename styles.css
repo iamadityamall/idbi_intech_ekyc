@@ -156,7 +156,7 @@ button {
   border-radius: 10px;
   overflow: hidden;
   padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(245, 130, 32, 0.1);
 }
 
 .fail-username {
