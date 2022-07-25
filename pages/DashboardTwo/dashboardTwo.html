@@ -8,8 +8,18 @@
     <link rel="stylesheet" href="../DashboardTwo/dashboardTwo.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
+    <style>
+      #ekyc-form {
+        width: 100%;
+        height: 100%;
+        transition: all 200ms linear;
+        /* border-left: 2px solid var(--secondary-color); */
+        display: none;
+      }
+      
+    </style>
   </head>
   <body>
     <section class="dashboard-section">
@@ -31,6 +41,10 @@
           <button class="sidebarButton">
             <i class="fa fa-user"> </i>
             <span>profile</span>
+          </button>
+          <button class="sidebarButton">
+            <i class="fa-solid fa-circle-e"></i>
+            <span style="text-transform: none">eKYC-Form</span>
           </button>
         </div>
       </aside>
@@ -66,18 +80,149 @@
             </div>
           </div>
         </nav>
-        <div
-          class="tabs"
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 5rem;
-            flex-direction: column;
-          "
-        >
-          <h1>CIBIL</h1>
-          <h4>COMING SOON</h4>
+        <div class="tabs">
+          <div
+            id="dashboard"
+            class="forms animation cibil-section"
+            style="
+              display: none;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              padding: 0;
+              width: 100%;
+            "
+          >
+            
+            <h1 style="color: #3ab4f2; font-size: 8rem">CIBIL</h1>
+            <p style="font-size: 2rem">coming soon ....</p>
+          </div>
+          <div id="profile" class="forms">profile page</div>
+          <div id="ekyc-form" class="forms animation">
+            <form id="main-form">
+              <div class="name common">
+                <label for="name"
+                  >Name:
+                  <span style="color: red; margin-left: 10px">*</span></label
+                >
+                <input type="text" id="name" placeholder="Full Name" />
+                <div class="name-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>Name field cannot be empty</p>
+                </div>
+              </div>
+              <div class="dob common">
+                <label for="dob"
+                  >DOB:
+                  <span style="color: red; margin-left: 10px">*</span></label
+                >
+                <input type="date" placeholder="Date of birth" id="dob" />
+                <div class="dob-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>Kindly select your date of birth</p>
+                </div>
+              </div>
+              <div class="aadhar common">
+                <label for="aadhar"
+                  >Aadhar Number:
+                  <span style="color: red; margin-left: 10px">*</span></label
+                >
+                <div class="aadhar-inputs">
+                  <input
+                    type="text"
+                    placeholder="XXXX"
+                    id="aadhar-1"
+                    maxlength="4"
+                  /><span>-</span>
+                  <input
+                    type="text"
+                    placeholder="XXXX"
+                    id="aadhar-2"
+                    maxlength="4"
+                  /><span>-</span>
+                  <input
+                    type="text"
+                    placeholder="XXXX"
+                    id="aadhar-3"
+                    maxlength="4"
+                  />
+                </div>
+                <div class="aadhar-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>aadhar field cannot be empty</p>
+                </div>
+              </div>
+              <div class="address common">
+                <label for="address">Address:</label>
+                <div class="address-container">
+                  <input type="text" id="address1" placeholder="address 1" />
+                  <input type="text" id="address2" placeholder="address 2" />
+                  <input type="text" id="address3" placeholder="address 3" />
+                </div>
+                <div class="address-fail">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  <p>address field cannot be empty</p>
+                </div>
+              </div>
+              <div class="mobile common">
+                <label for="mobile"
+                  >Mobile Number: <span style="color: red">*</span></label
+                >
+                <input
+                  type="text"
+                  id="mobile"
+                  placeholder="mobile number"
+                  maxlength="10"
+                />
+
+                <div class="preloader-container">
+                  <!-- added now -->
+                  <div class="fail">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <p>Mobile number must be of 10-digits</p>
+                  </div>
+                  <!-- added now end -->
+
+                  <!-- <div class="preloader-tub">
+                    <div class="preloader"></div>
+                    <p>waiting for verification</p>
+                  </div> -->
+                  <div class="success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <p>Mobile number verified successfully. Click Submit</p>
+                  </div>
+                  <!-- <div class="fail">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <p>failed to verify your mobile number.</p>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="notes">
+                <h3>Note:</h3>
+                <ul>
+                  <li>Enter your name as mentioned in aadhar card.</li>
+                  <li>
+                    If mobile verification fails, try again by pressing the
+                    reset button.
+                  </li>
+                  <li>Input fields with the astrik are must to be filled.</li>
+                  <li>
+                    Enter proper Aadhar number without the hiphon eg:-
+                    1234567891
+                    <strike>1234-2345-12345</strike>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="buttons">
+                <button type="button" id="main-submit" value="30">
+                  Submit
+                </button>
+                <button type="reset" id="reset">Reset</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <div id="loader-verify">
@@ -124,6 +269,221 @@
     </section>
 
     <script>
+      // fail validation (added now)
+      const name = document.getElementById("name");
+      const dob = document.getElementById("dob");
+      const aadhar = document.getElementById("aadhar");
+      const mobileNumber = document.querySelector("#mobile");
+      const address1 = document.getElementById("address1");
+      const address2 = document.getElementById("address2");
+      const address3 = document.getElementById("address3");
+      const reset = document.querySelector("#ekyc-form form .buttons #reset");
+      const mainSubmit = document.getElementById("main-submit");
+      const inputs = document.querySelectorAll(".forms input");
+      const aadharInputs = document.querySelectorAll(".aadhar-inputs input");
+      const nameFailAlert = document.querySelector(".name-fail");
+      const dobFailAlert = document.querySelector(".dob-fail");
+      const aadharFailAlert = document.querySelector(".aadhar-fail");
+      const addressFailAlert = document.querySelector(".address-fail");
+      const state = document.getElementById("state");
+      const dashboard = document.getElementById("dashboard");
+      const aadhar1 = document.querySelector("#aadhar-1");
+      const aadhar2 = document.querySelector("#aadhar-2");
+      const aadhar3 = document.querySelector("#aadhar-3");
+      const preloader = document.querySelector(".preloader-container");
+      const preloaderFail = document.querySelector(
+        ".preloader-container .fail"
+      );
+      const preloaderSuccess = document.querySelector(
+        ".preloader-container .success"
+      );
+
+      // (added now)
+      inputs.forEach((input) => {
+        input.addEventListener("keydown", () => {
+          input.setAttribute(
+            "oninput",
+            "this.value = this.value.toUpperCase()"
+          );
+        });
+      });
+
+      aadharInputs.forEach((input) => {
+        input.addEventListener("keypress", function (e) {
+          var char = String.fromCharCode(e.which);
+          if (!/[0-9]/.test(char)) {
+            e.preventDefault();
+          }
+        });
+      });
+
+      dob.addEventListener("click", () => {
+        dobFailAlert.style.display = "none";
+        dob.style.border = "none";
+      });
+
+      name.addEventListener("click", () => {
+        nameFailAlert.style.display = "none";
+        name.style.border = "none";
+      });
+
+      aadhar1.addEventListener("click", () => {
+        aadhar1.style.border = "none";
+        aadhar2.style.border = "none";
+        aadhar3.style.border = "none";
+        aadharFailAlert.style.display = "none";
+      });
+
+      aadhar1.addEventListener("keyup", function (e) {
+        const length = e.target.value.length;
+        const maxlength = parseInt(this.getAttribute("maxlength"));
+        if (length === maxlength) {
+          aadhar2.focus();
+        }
+      });
+
+      aadhar2.addEventListener("keyup", function (e) {
+        const length = e.target.value.length;
+        const maxlength = parseInt(this.getAttribute("maxlength"));
+        if (length === maxlength) {
+          aadhar3.focus();
+        }
+      });
+
+      aadhar3.addEventListener("keyup", function (e) {
+        const length = e.target.value.length;
+        const maxlength = parseInt(this.getAttribute("maxlength"));
+        if (length === maxlength) {
+          address1.focus();
+        }
+      });
+
+      address1.addEventListener("click", function (e) {
+        address1.style.border = "none";
+        addressFailAlert.style.display = "none";
+        address3.style.border = "none";
+        address2.style.border = "none";
+      });
+
+      mobileNumber.addEventListener("click", () => {
+        if (name.value === "") {
+          name.style.border = "2px solid red";
+          nameFailAlert.style.display = "flex";
+        }
+        if (dob.value === "") {
+          dob.style.border = "2px solid red";
+          dobFailAlert.style.display = "flex";
+        }
+        if (!aadhar1.value || !aadhar2.value || !aadhar3) {
+          aadhar1.style.border = "2px solid red";
+          aadhar2.style.border = "2px solid red";
+          aadhar3.style.border = "2px solid red";
+          aadharFailAlert.style.display = "flex";
+        }
+        if (!address1.value && !address2.value && !address3.value) {
+          address1.style.border = "2px solid red";
+          address2.style.border = "2px solid red";
+          address3.style.border = "2px solid red";
+          addressFailAlert.style.display = "flex";
+        }
+      });
+
+      mobileNumber.addEventListener("keypress", function (e) {
+        var char = String.fromCharCode(e.which);
+        console.log(char);
+        if (!/[0-9]/.test(char)) {
+          e.preventDefault();
+        }
+        if (mobileNumber.value.length < 9) {
+          preloaderSuccess.querySelector("p").innerText =
+            "Mobile Number must be of 10-digits";
+          preloaderSuccess.style.display = "flex";
+          preloaderSuccess.style.color = "green";
+          mobileNumber.style.border = "2px solid green";
+        }
+        if (mobileNumber.value.length === 9) {
+          preloaderSuccess.style.display = "none";
+        }
+      });
+
+      //(added now end)
+
+      // (added now start)
+      reset.addEventListener("click", () => {
+        preloaderTube.style.display = "none";
+        preloaderFail.style.display = "none";
+        preloaderSuccess.style.display = "none";
+        preloader2.style.display = "none";
+        mobileNumber.removeAttribute("disabled");
+        otpMessages.querySelector(".success").style.display = "none";
+        otpMessages.querySelector(".fail").style.display = "none";
+        otpBox.value = "";
+        inputs.forEach((button) => button.removeAttribute("disabled"));
+        nameFailAlert.style.display = "none";
+        addressFailAlert.style.display = "none";
+        aadharFailAlert.style.display = "none";
+        dobFailAlert.style.display = "none";
+
+        name.style.border = "none";
+        dob.style.border = "none";
+        address1.style.border = "none";
+        address2.style.border = "none";
+        address3.style.border = "none";
+        aadhar1.style.border = "none";
+        aadhar2.style.border = "none";
+        aadhar3.style.border = "none";
+        console.log("reset");
+      });
+
+      mainSubmit.addEventListener("click", (e) => {
+        // added now
+        if (mobileNumber.value === "") {
+          preloaderFail.querySelector("p").innerText =
+            "Mobile field cannot be empty";
+          mobileNumber.style.border = "2px solid red";
+          preloaderFail.style.display = "flex";
+          preloaderSuccess.style.display = "none";
+          e.preventDefault();
+        }
+        // added now (end)
+
+        if (name.value === "") {
+          name.style.border = "2px solid red";
+          nameFailAlert.style.display = "flex";
+          // mobileNumber.setAttribute("disabled", true);
+          e.preventDefault();
+        }
+        if (dob.value === "") {
+          dob.style.border = "2px solid red";
+          dobFailAlert.style.display = "flex";
+          // mobileNumber.setAttribute("disabled", true);
+          e.preventDefault();
+        }
+        if (!aadhar1.value || !aadhar2.value || !aadhar3) {
+          aadhar1.style.border = "2px solid red";
+          aadhar2.style.border = "2px solid red";
+          aadhar3.style.border = "2px solid red";
+          aadharFailAlert.style.display = "flex";
+          // mobileNumber.setAttribute("disabled", true);
+          e.preventDefault();
+        }
+        if (!address1.value && !address2.value && !address3.value) {
+          address1.style.border = "2px solid red";
+          address2.style.border = "2px solid red";
+          address3.style.border = "2px solid red";
+          addressFailAlert.style.display = "flex";
+          // mobileNumber.setAttribute("disabled", true);
+          e.preventDefault();
+        }
+      });
+
+      mobileNumber.addEventListener("click", () => {
+        preloaderFail.style.display = "none";
+        mobileNumber.style.border = "none";
+      });
+
+      // (added now end)
+
       // sidebar
       const sidebutton = document.querySelector(".sidebar-navbar button");
       const sidebarButtons = document.querySelectorAll(".sidebarButton");
@@ -142,12 +502,15 @@
         ".profile-container figure"
       );
       const submenu = document.querySelector(".profile-container .submenu");
+      const forms = document.querySelectorAll(".forms");
 
       // Functions declaration
 
       // 1. Show and hide sidebar with button click
       function showContainer(e) {
+        console.log(e);
         const title = e.target.innerText.toLowerCase();
+        console.log(title);
         forms.forEach((item) => {
           if (item.getAttribute("id") === title) {
             item.style.display = "flex";
@@ -164,13 +527,6 @@
         });
       }
 
-      // 2. Showing submenus when hover on profile pic in tab-nav
-      // function showSubmenu(e) {
-      //   submenu.classList.toggle("showSubmenu");
-      // }
-
-      // Adding Eventlisteners
-
       // 1. adding evenetlisteners to sidebar buttons
       sidebarButtons.forEach((button) => {
         button.addEventListener("click", showContainer);
@@ -179,7 +535,6 @@
       // sidebar button icon
       sidebutton.addEventListener("click", () => {
         tabsContainer.classList.toggle("tabs-container-active");
-        // logo1.classList.toggle("inactive");
         logo2.classList.toggle("inactive");
       });
 
@@ -240,6 +595,9 @@
       const perimeter = circle.getAttribute("r") * 2 * Math.PI;
       circle.setAttribute("stroke-dasharray", perimeter);
 
+      const cibilSection = document.querySelector(".cibil-section");
+      console.log(cibilSection);
+
       let currentOffset = 0;
       let duration;
       const timer = new Timer(durationInput, startButton, pauseButton, {
@@ -255,7 +613,7 @@
         },
         onComplete() {
           loaderVerifyContainer.style.display = "none";
-          dashboard.style.filter = "none";
+          cibilSection.style.display = "flex";
         },
       });
       timer.start();
