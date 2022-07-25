@@ -1,4 +1,6 @@
 /* mobile version css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -43,6 +45,7 @@ input[type="checkbox"] {
   width: 14px;
   height: 14px;
   border-radius: 0;
+  margin-right: 5px;
 }
 
 input:focus {
@@ -112,6 +115,7 @@ button {
 }
 
 .hero-form__container {
+  width: 90vw;
   margin-top: 5rem;
   padding: 3rem;
   display: grid;
@@ -120,7 +124,7 @@ button {
   justify-content: center;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 1);
   animation: popup 300ms ease-in-out;
 }
 
@@ -152,11 +156,11 @@ button {
   border-radius: 10px;
   overflow: hidden;
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .fail-username {
-  font-size: 8px;
+  font-size: 14px;
   display: none;
   align-items: center;
   color: red;
@@ -172,7 +176,7 @@ button {
 }
 
 .fail-password {
-  font-size: 8px;
+  font-size: 14px;
   display: none;
   align-items: center;
   color: red;
@@ -209,11 +213,13 @@ button {
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .hero-form__container__checkbox-forgot-password a {
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
+  text-decoration: none;
 }
 
 .hero-form__container__checkbox-forgot-password .checkbox {
@@ -223,7 +229,7 @@ button {
 }
 
 .hero-form__container__checkbox-forgot-password a {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: capitalize;
   color: var(--secondary-color);
   font-weight: bold;
@@ -238,7 +244,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -246,4 +252,3 @@ button {
   margin-left: 10px;
   color: var(--ternary-color);
 }
- 
