@@ -300,7 +300,7 @@ input:focus-within {
     transform: translateX(30%);
   } */
   100% {
-    transform: translateX(0%);
+    transform: trans+lateX(0%);
   }
 }
 
